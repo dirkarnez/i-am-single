@@ -1,7 +1,7 @@
 (function () {
    window.singleWindows = window.singleWindows || {};
 
-   window.singleWindowOpen = window.myFunc || function (url, type) {
+   window.singleWindowOpen = window.singleWindowOpen || function (url, type) {
       var w = window.singleWindows[type];
       if (w == undefined || w == null || w.closed) {
          window.singleWindows[type] = window.open(url);
