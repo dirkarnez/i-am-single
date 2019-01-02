@@ -29,16 +29,16 @@
 
    window.addEventListener('storage', window.handleStorageChange);
 
-   window.handleWindowUnload = window.handleWindowUnload || function (event) {
+   window.handleWindowUnload = window.handleWindowUnload || function () {
       window.singleWindowClose();
    }
 
    window.addEventListener("unload", window.handleWindowUnload);
 
-   window.singleWindowOpen = window.singleWindowOpen || function (url, type) {
+   window.singleWindowOpen = window.singleWindowOpen || function (type, url, target, features, replace) {
       var w = window.singleWindows[type];
       if (w == undefined || w == null || w.closed) {
-         window.singleWindows[type] = window.open(url);
+         window.singleWindows[type] = window.open(url, target, features, replace);
       } else {
          w.focus();
       }
@@ -46,7 +46,7 @@
 
    window.singleWindowClose = window.singleWindowClose || function () {
       var hasStorageFeature = typeof (Storage) !== "undefined";
-
+      
       var types = [];
       if (arguments.length > 0) {
          types = Array.from(arguments);
